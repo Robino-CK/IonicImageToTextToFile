@@ -32,6 +32,7 @@
     "async-ocrad": "0.0.2",
     "buffer": "^6.0.3",
     "cordova-android": "9.0.0",
+    "cordova-browser": "6.0.0",
     "events": "^3.2.0",
     "ionic": "^5.4.16",
     "ngx-device-detector": "^2.0.5",
@@ -97,7 +98,8 @@
       "cordova-sqlite-storage": {}
     },
     "platforms": [
-      "android"
+      "android",
+      "browser"
     ]
   }
 }
