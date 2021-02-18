@@ -1,16 +1,44 @@
-<ion-fab vertical="bottom" horizontal="center" slot="fixed">
-  <ion-fab-button (click)="takePicture()">
-    <ion-icon name="camera"></ion-icon>
-  </ion-fab-button>
-</ion-fab>
 <ion-content>
-  <ion-fab vertical="top" horizontal="left" slot="fixed" >
-    <textarea  id="inputDescription1" rows="20"
-    [(ngModel)]="text"name="longDescription"></textarea>
-  </ion-fab>
- 
-  
+  <ion-grid>
+    <ion-row>
+      <ion-col size="9">
+        <div>
+          <ion-textarea id="inputDescription1" rows="20" [(ngModel)]="text" placeholder="Tomate, Gurke,..."></ion-textarea>
+        </div>
+      </ion-col>
+      <ion-col>
+        <div>
+          <ion-fab-button (click)="takePicture()">
+            <ion-icon name="camera"></ion-icon>
+          </ion-fab-button>
+         
+        </div>
+        <div>
+       
+          <ion-fab-button  (click)="f.click()">
+            <ion-icon name="cloud-upload-outline"></ion-icon>
+            <ion-label></ion-label>
+          </ion-fab-button>
+          <input class="ion-hide" #f type="file" (change)="takeImage($event)" id="file-input"
+          accept="image/png, image/jpeg">
 
-  
+         
+         
+        </div>
+      </ion-col>
+
+    </ion-row>
+
+  </ion-grid>
+  <ion-fab vertical="top" horizontal="left" slot="fixed">
+
+  </ion-fab>
+  <ion-fab vertical="top" horizontal="right" slot="fixed">
+
+  </ion-fab>
+
+
+
+
 </ion-content>
 <img [src]="currentImage" *ngIf="currentImage">

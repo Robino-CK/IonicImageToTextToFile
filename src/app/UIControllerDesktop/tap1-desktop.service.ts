@@ -29,6 +29,20 @@ export class Tap1DesktopService {
 
       })
     }
+    public textFromImage(picture: string) {
+     
+      return  Tesseract.recognize(picture)
+       .catch(err => {
+         console.error(err)
+       }
+       )
+       .then(result => {
+         console.log(result);
+           return result["data"].text;
+ 
+ 
+       })
+    }
   }
 
   
