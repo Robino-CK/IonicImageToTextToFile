@@ -7,7 +7,7 @@ import { Tab1BothService } from "../UIControllerBoth/tab1-both.service";
 import { Tap1DesktopService } from "../UIControllerDesktop/tap1-desktop.service";
 import { Tap1MobileService } from "../UIControllerMobile/tap1-mobile.service";
 
-import { SQLite, SQLiteObject } from '@ionic-native/sqlite/ngx';
+import { DatabaseService } from "../services/database.service";
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -21,8 +21,8 @@ export class Tab1Page {
 
 
   constructor(private deviceService: DeviceDetectorService
-    , private tab1ServiceDesktop: Tap1DesktopService, private tab1ServiceMobile: Tap1MobileService, private tab1BothService: Tab1BothService,
-  ) { }
+    , private tab1ServiceDesktop: Tap1DesktopService, private tab1ServiceMobile: Tap1MobileService, private tab1BothService: Tab1BothService
+  , private databaseService: DatabaseService) { }
 
   async takePicture() {
 
@@ -44,48 +44,13 @@ export class Tab1Page {
   }
   saveData() {
 
-
-
-    var sqlite = new SQLite();
-
-    sqlite.create({
-      name: 'data.db',
-      location: 'default'
-
+     this.databaseService.createTable("pictureTexts")
+    .finally ( () => {
+      this.databaseService.insertEntry("pictureTexts", "this.text")
+      
     })
-      .then((db: SQLiteObject) => {
 
-
-        db.executeSql('create table danceMoves(name VARCHAR(32))', [])
-          .then(() => {
-
-            console.log('Executed SQL')
-            var sqlite2 = new SQLite();
-
-            sqlite2.create({
-              name: 'data.db',
-              location: 'default'
-
-            }).then((db: SQLiteObject) => {
-              db.executeSql('INSERT INTO danceMoves (name) VALUES ("h")', [])
-              .then(() => {
-                console.log('Executed SQL: Insert')
-              })
-              .catch(e=> {
-                console.log('err on Insert ' +e )
-              })
-            })
-          })
-          .catch(e => {
-            console.log(e)
-
-          });
-
-
-
-      })
-      .catch(e => console.log(e));
-
+ 
 
   }
 
