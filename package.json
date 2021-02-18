@@ -32,6 +32,7 @@
     "cordova-android": "9.0.0",
     "events": "^3.2.0",
     "ionic": "^5.4.16",
+    "ngx-device-detector": "^2.0.5",
     "node-tesseract-ocr": "^2.0.0",
     "rxjs": "~6.6.0",
     "stream": "0.0.2",
