@@ -5,6 +5,10 @@ import { DeviceDetectorService } from "ngx-device-detector";
 import { PhotoDesktopService } from "../services/photo-desktop.service";
 import { PhotoService } from "../services/photo.service";
 import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
+import { ImagePicker } from '@ionic-native/image-picker/ngx';
+
+import { Tap1DesktopService } from "../UIControllerDesktop/tap1-desktop.service";
+import { Tap1MobileService } from "../UIControllerMobile/tap1-mobile.service";
 
 @Component({
   selector: 'app-tab1',
@@ -13,62 +17,27 @@ import { OCR, OCRSourceType, OCRResult } from '@ionic-native/ocr/ngx';
 })
 
 
-export class Tab1Page {
+ export  class Tab1Page {
   public text;
   currentImage: any;
 
-  constructor(public photoService: PhotoService, public photoDesktopService: PhotoDesktopService,private deviceService: DeviceDetectorService) { }
+  constructor(private deviceService: DeviceDetectorService
+   , private tab1ServiceDesktop: Tap1DesktopService, private tab1ServiceMobile: Tap1MobileService) { }
 
-  async takePicture() {
-    let pic;
-    //MOBILE:
-    if (this.deviceService.isMobile()) {
-      //takingPic
-      this.photoService.takePicture().then((imageData) => {
-        //Create Mobile OCR Object:
-        var ocr = new OCR();
-        ocr.recText(OCRSourceType.BASE64,imageData)
-         .then((ocrResult: OCRResult) => {
-          console.log(JSON.stringify(ocrResult));
-          //set Text:
-          this.text = JSON.stringify(ocrResult);
-        })
-          .catch((error: any) => {
-            console.error(error);
-     
-  
-          }); 
-      }, (err) => {
-        // Handle error
-        console.log("Camera issue:" + err);
-        this.text = "error2" + err;
-      });;
-      this.text = pic;
-  
-    } else {
-      //DESKTOP
-      //Much Cleaner and more Easy on Desk. -> Perhaps mobile could be like this.
-      pic = await this.photoDesktopService.takePhotoDesktop();
-      //Tesseract is actually damn slow.     
-      Tesseract.recognize(pic)
-        .catch(err => {
-          console.error(err)
+      async takePicture() {
+        var imgPicker = new ImagePicker();
+        if(this.deviceService.isMobile()) {
+          this.tab1ServiceMobile.takePicture().then(text => {
+            this.text = text;
+          });
+        
+        } else {
+           this.tab1ServiceDesktop.takePicture().then(text => {
+             this.text = text;
+           });
         }
-        )
-        .then(result => {
-          console.log(result);
-          this.text = result["data"].text;
 
-
-        })
-
-
-    }
-
-
-
-
-  }
+      }
 
 
 
