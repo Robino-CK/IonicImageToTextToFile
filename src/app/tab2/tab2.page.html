@@ -16,18 +16,20 @@
   
 
   
- 
+  <div>
+    <ion-textarea id="inputDescription1" rows="20" [(ngModel)]="text" placeholder="you need to load Data"></ion-textarea>
+  </div>
 
- 
+  <ion-fab vertical="bottom" horizontal="center" slot="fixed">
+    <ion-button color="dark" (click)= "showAllTextes()">Load Data</ion-button>
+  </ion-fab>
   <ion-content>
     <ion-grid>
       <ion-row>
       </ion-row>
     </ion-grid>
     <ion-content>
-      <ion-fab vertical="bottom" horizontal="center" slot="fixed">
-        <ion-button color="dark">Dark</ion-button>
-      </ion-fab>
+      
     </ion-content>
     
   

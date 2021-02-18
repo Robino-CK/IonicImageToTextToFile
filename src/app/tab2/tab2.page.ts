@@ -1,17 +1,30 @@
 import { Component } from '@angular/core';
-import { PhotoService } from '../services/photo.service';
-
+import { DatabaseService } from '../services/database.service';
 @Component({
   selector: 'app-tab2',
   templateUrl: 'tab2.page.html',
   styleUrls: ['tab2.page.scss']
 })
 export class Tab2Page {
-  private imageSrc: string = '';
+  public text: string = '';
    recText: string;
   
-  constructor(public photoService: PhotoService) {
+  constructor(private databaseService: DatabaseService) {
     
   }
 
+  showAllTextes() {
+    
+     this.databaseService.getAllEntriesOfTable("table_1").then((res) => {
+      for (let i = 0; i < res.rows.length; i++) {
+        let item = res.rows.item(i);
+        // do something with it
+
+        this.text = this.text + "\n" + item.name;
+}
+
+    })
+
+
+  }
 }

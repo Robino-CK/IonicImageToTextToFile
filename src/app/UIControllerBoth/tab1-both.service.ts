@@ -24,19 +24,7 @@ export class Tab1BothService {
       return;
     }
     let self = this
-    /* reader.onloadend =  function () {
-        self.imageToOCR(reader).then(text =>{
-          return text;
-      }) 
-    }*/
-    
-    /*reader.onload = (function (file) { // here we save variable 'file' in closure
-     return function (e) { // return handler function for 'onload' event
-         var data = this.result; // do some thing with data
-     }
-    })(file);
-      */
-  
+ 
     reader.readAsDataURL(file);
     return new Promise<String>((resolve, reject) => {
       reader.onloadend =  function () {

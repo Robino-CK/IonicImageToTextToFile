@@ -44,13 +44,13 @@ export class Tab1Page {
   }
   saveData() {
 
-     this.databaseService.createTable("pictureTexts")
+     this.databaseService.createTable("table_1")
     .finally ( () => {
-      this.databaseService.insertEntry("pictureTexts", "this.text")
+      this.databaseService.insertEntry("table_1", this.text)
+      this.text = "saved."
       
     })
 
- 
 
   }
 

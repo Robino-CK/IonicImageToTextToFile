@@ -15,7 +15,7 @@ export class DatabaseService {
       .then((db: SQLiteObject) => {
 
         console.log(`Created Table: ${name} `)
-        return db.executeSql(`create table ${name} (name STRING(32))`, [])
+        return db.executeSql(`CREATE TABLE ${name} (name TEXT)`, [])
 
 
 
@@ -49,7 +49,7 @@ export class DatabaseService {
   }
 
 
-  getAllEntriesOfTable(tableName: string, value: string) {
+  getAllEntriesOfTable(tableName: string) {
     var sqlite2 = new SQLite();
 
     return sqlite2.create({
