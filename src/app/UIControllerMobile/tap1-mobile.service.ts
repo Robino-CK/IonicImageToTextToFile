@@ -34,7 +34,7 @@ export class Tap1MobileService {
       .then((ocrResult: OCRResult) => {
         console.log(JSON.stringify(ocrResult));
         //set Text:
-        return JSON.stringify(ocrResult);
+        return JSON.stringify(ocrResult.blocks.blocktext);
       })
       .catch((error: any) => {
         return "OCR PROBLEM:" + error;

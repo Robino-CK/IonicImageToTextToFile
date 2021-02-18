@@ -1,6 +1,7 @@
 import { Component, VERSION  } from "@angular/core";
 
 import { DeviceDetectorService } from "ngx-device-detector";
+import { Tab1BothService } from "../UIControllerBoth/tab1-both.service";
 
 
 import { Tap1DesktopService } from "../UIControllerDesktop/tap1-desktop.service";
@@ -18,7 +19,7 @@ import { Tap1MobileService } from "../UIControllerMobile/tap1-mobile.service";
   
 
   constructor(private deviceService: DeviceDetectorService
-   , private tab1ServiceDesktop: Tap1DesktopService, private tab1ServiceMobile: Tap1MobileService) { }
+   , private tab1ServiceDesktop: Tap1DesktopService, private tab1ServiceMobile: Tap1MobileService, private tab1BothService: Tab1BothService) { }
 
       async takePicture() {
         
@@ -34,50 +35,12 @@ import { Tap1MobileService } from "../UIControllerMobile/tap1-mobile.service";
         }
 
       }
-      takeImage (e:any) {
-      
-    
-          var file = e.dataTransfer ? e.dataTransfer.files[0] : e.target.files[0];
-          var pattern = /image-*/;
-          var reader = new FileReader();
-          if (!file.type.match(pattern)) {
-            alert('invalid format');
-            return;
-          }
-          reader.onload = this.imageToBase64.bind(this);
-          reader.readAsDataURL(file);
-
-
-          
+      async takeImage (e:any) {
+          this.text = await this.tab1BothService.takeImage(e)
           
         }
-        private imageToBase64(e:any) {
-          let reader = e.target;
-          
-          
-          
-          if(this.deviceService.isMobile()) {
-            this.text = this.tab1ServiceMobile.convertPicInText(reader.result.split(",")[1])
-            .then(text => {
-              this.text = text;
-            })
-            .catch((err: any) => {
-              this.text = "error On OCR" + err;
-            });
-          } else {
-            this.text = this.tab1ServiceDesktop.textFromImage(reader.result)
-            .then(text => {
-              this.text = text;
-            })
-            .catch((err: any) => {
-              this.text = "error On OCR" + err;
-            });
-          }
-          
-        
-        
-          
-         
+        saveData () {
+
         }
       
 
