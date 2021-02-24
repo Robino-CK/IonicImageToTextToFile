@@ -6,7 +6,7 @@ import { DeviceDetectorService } from "ngx-device-detector";
 import { DatabaseService } from "../services/database.service";
 import { OcrService } from "../services/ocr.service";
 import { PhotoService } from "../services/photo.service";
-import { UploadImageService } from "../services/upload-image.service";
+
 @Component({
   selector: 'app-tab1',
   templateUrl: 'tab1.page.html',
@@ -19,7 +19,7 @@ export class Tab1Page {
   currentImage: any;
 
 
-  constructor(private uploadImageService: UploadImageService , private ocrService: OcrService
+  constructor(private ocrService: OcrService
   , private databaseService: DatabaseService, private photoService: PhotoService) { }
 
   async takePicture() {
@@ -36,7 +36,7 @@ export class Tab1Page {
   }
   async uploadImage(e: any) {
     
-    let res =  await this.uploadImageService.uploadImage(e);
+    let res =  await this.photoService.uploadImage(e);
     let that = this;
     
     

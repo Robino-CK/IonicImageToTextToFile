@@ -13,7 +13,7 @@ export class OcrService {
     
     return ocr.recText(OCRSourceType.BASE64, imageData)
       .then((ocrResult: OCRResult) => {
-        console.log(JSON.stringify(ocrResult));
+        
         //set Text:
         if (!ocrResult.foundText) {
           return "no Text found"
