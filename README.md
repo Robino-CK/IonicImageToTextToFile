@@ -9,6 +9,7 @@ Node, Ionic, Cordova
 ```
 There a a lot of helps to Setup Ionic. Sometimes you have to read carfull the terminal.  
 If you got Problems on this, you can just ask.
+Then you need to Add Android Plattform. For more Details, check the Ionic API.
 ### run:
 I think you need to install a lot of libs, I dunno If there is a automatik for this.
 
