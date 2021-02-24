@@ -19,5 +19,10 @@ For Android:
 ionic cordova run android
 ```
 It is also posible to use VSC to Debug. Check the Cordova VSC Extension. You need some system Variables.
+You can use:
+```
+"ionicLiveReload": true
+```
+in your launch.json for liveReloading, so you dont need restart the Debugger everytime you make a change.
 
 
